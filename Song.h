@@ -1,3 +1,7 @@
+//#ifndef SONG_H
+//#define SONG_H
+
+#include "Parameters.h"
 #include <string>
 #include<vector>
 #include <map>
@@ -10,21 +14,24 @@ class Song
 {
 public:
     Song();
-    Song(std::string& title, std::string& artist, std::vector<std::string> tags);
+    Song(std::string& title, std::string& artist, std::map<std::string, int> tags);
     virtual ~Song();
 
-    virtual int calcScore(const std::string& input) const = 0 ;
+    virtual int calcScore(const std::string& input) = 0 ;
     friend std::ostream& operator<<(std::ostream& os, const Song& song) ;
 
-    static void init(std::map<std::string , std::vector<int>> parameters);
+    static void init(Parameters parameters);
+
 
 protected:
-    static std::map<std::string , std::vector<int>> s_parameters;
+    static Parameters s_parameters;
 
     std::string _title;
     std::string _artist;
-    std::vector<std::string> _tags;
+    std::map<std::string, int> _tags;
 
-    int calcTagScore() const;
-    virtual void print(std::ostream& where) const;
+    int calcTagScore(const std::string& query) ;
+    virtual void _print(std::ostream& where) const;
 };
+
+//#endif
