@@ -1,14 +1,23 @@
 #include "Parameters.h"
+#include <iostream>
+#include <fstream>
+#include <string>
 
 Parameters::Parameters()
 {
     //ctor
 }
 
+Parameters::Parameters(std::ifstream paramsFile)
+{
+
+}
+
 Parameters::~Parameters()
 {
     //dtor
 }
+
 void Parameters::setTagMatchWeight(int w)
 {
 

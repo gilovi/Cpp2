@@ -11,7 +11,7 @@
 /**
 *
 */
-class Instrumental : Song
+class Instrumental : public Song
 {
 public:
     Instrumental(std::string& title, std::string& artist, std::map<std::string, int>

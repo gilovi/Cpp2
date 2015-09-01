@@ -10,7 +10,7 @@ Song(title, artist, tags), _lyrics(lyrics)
 
 }
 
-int Lyrical::calcScore(const std::string input) const
+int Lyrical::calcScore(const std::string& input)
 {
 
 }

@@ -1,5 +1,5 @@
-//#ifndef SONG_H
-//#define SONG_H
+#ifndef SONG_H
+#define SONG_H
 
 #include "Parameters.h"
 #include <string>
@@ -34,4 +34,4 @@ protected:
     virtual void _print(std::ostream& where) const;
 };
 
-//#endif
+#endif

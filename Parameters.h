@@ -1,17 +1,21 @@
-ifndef PARAMETERS_H
-define PARAMETERS_H
+#ifndef PARAMETERS_H
+#define PARAMETERS_H
 
-#include "Instrumental.h"
-#include "Lyrical.h"
-
+//#include "Instrumental.h"
+//#include "Lyrical.h"
+#include <string>
+#include <map>
 
 class Parameters
 {
     public:
         Parameters();
+        Parameters(std::ifstream paramsFile);
         virtual ~Parameters();
 
-        friend class Instrumental ;
+        friend class Song;
+        friend class Instrumental;
+        friend class Lyrical;
 
         void setTagMatchWeight(int w);
         void setLyricsMatchWeight(int w);
@@ -31,4 +35,4 @@ class Parameters
 
 };
 
-endif // PARAMETERS_H
+#endif // PARAMETERS_H

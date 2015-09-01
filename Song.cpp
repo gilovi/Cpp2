@@ -19,7 +19,7 @@ Song::~Song()
 {
 }
 
-Song::Parameters s_parameters;
+Parameters Song::s_parameters;
 
 void Song::init(Parameters parameters)
 {

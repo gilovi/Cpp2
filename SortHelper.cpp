@@ -1,7 +1,7 @@
 #include "SortHelper.h"
 /**
-   * add an item, with  size() index
-  	*   As in insertion sort, place the given value in the appropriate
+    * add an item, with size() index
+    * As in insertion sort, place the given value in the appropriate
   	* position, while maintaining a sorted list, with descending order of values.
   	*/
 void SortHelper::addItem(const int value)
@@ -10,7 +10,7 @@ void SortHelper::addItem(const int value)
     // insertion to the list:
     int originalIndex = _list.size();
     ListItem item(value, originalIndex);
-    
+
     std::list<ListItem>::iterator it = _list.begin();
 
     // Look for the first position where the value is smaller than the
@@ -24,13 +24,13 @@ void SortHelper::addItem(const int value)
 
     #ifdef DEBUG
     std::cout << "list now has size: " << _list.size() << " and is now: ";
-    for (std::list<ListItem>::iterator it = _list.begin(); it != _list.end(); it++) 
+    for (std::list<ListItem>::iterator it = _list.begin(); it != _list.end(); it++)
     {
         std::cout << "<" << it->_value << "," << it->_originalIndex << ">,";
     }
     std::cout << std::endl;
     #endif
-    
+
 }
 
 /**
@@ -57,7 +57,7 @@ void SortHelper::getSortedOrderInArray(int arrayToFill[]) const
     {
         arrayToFill[i] = it->_originalIndex;
     }
-    
+
 }
 
 /**
