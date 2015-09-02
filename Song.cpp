@@ -6,12 +6,12 @@ using namespace std;
 //map<string, vector<int>> Song::s_parameters ;
 
 Song::Song():
-_title(), _artist(), _tags()
+	_title(), _artist(), _tags()
 {
 }
 
 Song::Song(string& title, string& artist, map<string, int> tags):
-_title(title), _artist(artist), _tags(tags)
+	_title(title), _artist(artist), _tags(tags)
 {
 }
 
@@ -23,23 +23,23 @@ Parameters Song::s_parameters;
 
 void Song::init(Parameters parameters)
 {
-    s_parameters = parameters;
+	s_parameters = parameters;
 }
 
 std::ostream& operator<<(std::ostream& os, const Song& song)
 {
-    song._print(os); // call the child print method.
-    return os;
+	song.print(os); // call the child print method.
+	return os;
 }
 
-void Song::_print(ostream& where) const
+void Song::print(ostream& where) const
 {
-    where << _title ;
+	where << _title ;
 }
 
 int Song::calcTagScore(const string& query)
 {
-    return _tags[query] * s_parameters.tagMatchWeight;
+	return _tags[query] * s_parameters._tagMatchWeight;
 }
 
 

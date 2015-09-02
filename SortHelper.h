@@ -12,12 +12,12 @@
 */
 typedef struct ListItem
 {
-ListItem(const int value, const int originalIndex) :
-    _value(value), _originalIndex(originalIndex)
-    {}
-    
-    int _value;
-    int _originalIndex;
+	ListItem(const int value, const int originalIndex) :
+		_value(value), _originalIndex(originalIndex)
+	{}
+
+	int _value;
+	int _originalIndex;
 } ListItem;
 
 
@@ -32,24 +32,24 @@ ListItem(const int value, const int originalIndex) :
  */
 class SortHelper
 {
- public:
-    SortHelper()
-    {}
+public:
+	SortHelper()
+	{}
 
-   /**
-   * add an item, with  size() index
-  	*   As in insertion sort, place the given value in the appropriate
-  	* position, while maintaining a sorted list, with descending order of values.
-  	*/
-    void addItem(const int value);
+	/**
+	* add an item, with  size() index
+	*   As in insertion sort, place the given value in the appropriate
+	* position, while maintaining a sorted list, with descending order of values.
+	*/
+	void addItem(const int value);
 
 	/**
 	* return how many items are currently in the SortHelper
-   */     
-    inline int size() const
-    {
-        return (int)_list.size();
-    }
+	*/
+	inline int size() const
+	{
+		return (int)_list.size();
+	}
 
 	/**
 	 *   Get the sorted order of indices (the indices of the insertion of items,
@@ -59,32 +59,32 @@ class SortHelper
 	 * otherwise memory access errors (like segmentation fault) might occur.
 	 *   The given array will be filled with the indices in the sorted order.
 	 */
-    void getSortedOrderInArray(int arrayToFill[]) const;
+	void getSortedOrderInArray(int arrayToFill[]) const;
 
 	/**
 	 *   Get the sorted order of indices (the indices of the insertion of items,
-	 *   sorted according to the values of the items).	
+	 *   sorted according to the values of the items).
 	 *   The returned list will contain the indices of the inserted items in an
- 	 *   order such that the original items will be from large value to smaller value.
+	 *   order such that the original items will be from large value to smaller value.
 	*/
-    std::list<int> getSortedOrderInList() const;
+	std::list<int> getSortedOrderInList() const;
 
 	/**
 	 *   Get the sorted order of indices (the indices of the insertion of items,
 	 * sorted according to the values of the items).
 	 *   The returned vector will contain the indices of the inserted items in an
 	 *   order such that the original items will be from large value to smaller value.
- 	*/  
-    std::vector<int> getSortedOrderInVector() const;
-    
-    /**
-    */
-    virtual ~SortHelper()
-    {}
-    
- private:
-    std::list<ListItem> _list;
-    
+	*/
+	std::vector<int> getSortedOrderInVector() const;
+
+	/**
+	*/
+	virtual ~SortHelper()
+	{}
+
+private:
+	std::list<ListItem> _list;
+
 };
 
 #endif

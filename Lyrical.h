@@ -12,15 +12,27 @@
 class Lyrical : public Song
 {
 public:
-    Lyrical(std::string& title, std::string& artist, std::map<std::string, int> tags, std::vector<std::string> lyrics);
+    /**
+    * Lyrical ctor for title artist  tags and lyrics
+    */
+	Lyrical(std::string& title, std::string& artist, std::map<std::string, int> tags, std::vector<std::string> lyrics);
+	/**
+	* an override for print in Song class
+	* @see Song::print(const std::string&)
+	*/
+	void print(const std::string& query) override;
 
 private:
-    std::vector<std::string> _lyrics;
-
-    int calcScore(const std::string& input) override;
-    int calcLyricsMatchScore(const std::string query);
-    void _print(std::ostream& where) const override;
-    void _printScore(const std::string& query) const;
+	std::vector<std::string> _lyrics;
+    /**
+	* an override for calcScore in 'Song' class
+	* @see Song::calcScore(const std::string&)
+	*/
+	int calcScore(const std::string& input) override;
+	/**
+	* returns the lyrics match score for a given query
+	*/
+	int calcLyricsMatchScore(const std::string query);
 
 };
 
