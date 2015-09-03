@@ -9,7 +9,7 @@
 #include <map>
 
 /**
-*
+* an instrumental song representation class
 */
 class Instrumental : public Song
 {

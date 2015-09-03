@@ -54,29 +54,30 @@ Parameters::Parameters(std::string paramsFile)
 		vector<string> splited = split(line, DESCRIPTION_SEPARATOR);
 
 		string param = splited[0];
-		if (param.compare(TAG_MATCH_SCORE))
+		string val = splited[1];
+		if (param.compare(TAG_MATCH_SCORE) == 0)
 		{
-			_tagMatchWeight = stoi(splited[0]);
+			_tagMatchWeight = stoi(val);
 		}
-		else if (param.compare(LYRICS_MATCH_SCORE))
+		else if (param.compare(LYRICS_MATCH_SCORE) == 0)
 		{
-			_lyricsMatchWeight = stoi(splited[1]);
+			_lyricsMatchWeight = stoi(val);
 		}
-		else if (param.compare(INSTRUMENTS))
+		else if (param.compare(INSTRUMENT_MATCH_SCORE) == 0)
 		{
-			_instrumentMatchWeight = (stoi(splited[1]));
+			_instrumentMatchWeight = (stoi(val));
 		}
-		else if (param.compare(BMP_LIKELI_WEIGHT))
+		else if (param.compare(BMP_LIKELI_WEIGHT) == 0)
 		{
-			_bpmLikelihoodWeight = (stoi(splited[1]));
+			_bpmLikelihoodWeight = (stoi(val));
 		}
 		else // it's probably bpm rates
 		{
+		    vector<string> bpmStr = split(val, NUM_SEPARATOR);
 			vector<double> bpmParams;
-			string::size_type sz;
 
-			bpmParams.push_back(stod(splited[1], &sz));
-			bpmParams.push_back(stod(splited[1].substr(sz)));
+			bpmParams.push_back(stod(bpmStr[0]));
+			bpmParams.push_back(stod(bpmStr[1]));
 
 			addBmpWord(splited[0], bpmParams);
 

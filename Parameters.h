@@ -59,11 +59,9 @@ class Parameters
 
     private:
             int _tagMatchWeight = -1;
-
             int _lyricsMatchWeight = -1;
-
             int _instrumentMatchWeight = -1;
-            int _bpmLikelihoodWeight;
+            int _bpmLikelihoodWeight = -1;
             std::map<std::string, std::vector<double>> _bmpParams;
 
 

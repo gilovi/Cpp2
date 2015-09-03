@@ -20,7 +20,9 @@ public:
     * default dtor
     */
 	virtual ~SongsFactory();
-
+    /**
+    * a function to extract songs from file
+    */
 	static std::vector<std::unique_ptr<Song>> getSongs(std::string songsFileName);
 
 protected:

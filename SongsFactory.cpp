@@ -25,17 +25,9 @@ const std::string PERFORMED_BY = "performedBy";
 const std::string BPM = "bpm";
 
 
-
-
-SongsFactory::SongsFactory()
-{
-	//ctor
-}
-
-SongsFactory::~SongsFactory()
-{
-	//dtor
-}
+/**
+    * a function to extract songs from file
+    */
 vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 {
 	vector<std::unique_ptr<Song>> songs;
@@ -73,11 +65,12 @@ vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 
 		getline(instream, line);
 		// Expect a line of "tags: {...}"
-		vector<string> tagsVec = Parameters::split(getWordList(line), WORDS_SEPARATOR);
+
+        vector <string> tagsVec = Parameters::split(getWordList(line), WORDS_SEPARATOR);
 		map<string, int> tags;
-		for (vector<string>::iterator it = tagsVec.begin() ; it != tagsVec.end(); it++)
+		for (vector<string>::iterator it = tagsVec.begin() ; it != tagsVec.end(); ++it)
 		{
-			assert(it + 1 == tagsVec.end()); // wrong tags. (the tags are odd)
+			assert(it + 1 != tagsVec.end()); // wrong tags. (the tags are odd)
 			tags[*it] = stoi(*(++it));
 		}
 
@@ -85,7 +78,7 @@ vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 		string lyricsBy = "";
 		map<string, int> instruments ;
 		string performedBy = "";
-		string bpmStr = "";
+		int bpm = 0;
 
 		getline(instream, line);
 		// Expect either lyrics or instruments.
@@ -100,6 +93,7 @@ vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 			getline(instream, line);
 			pos = LYRICS_BY.size() + 2;
 			lyricsBy = line.substr(pos);
+
 			songs.push_back( unique_ptr<Song> (new Lyrical(title, lyricsBy, tags, lyrics)));
 		}
 		else
@@ -134,15 +128,14 @@ vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 			{
 
 				pos = BPM.size() + 2;
-				bpmStr = line.substr(pos);
+				bpm = stoi(line.substr(pos));
 
 			}
 			else
 			{
 				assert ( (line.compare(SEPARATOR) == 0) || (line.compare(END_OF_SONGS) == 0));
-
-				songs.push_back( unique_ptr<Song> (new Instrumental(title, performedBy, tags, instruments, stoi(bpmStr))));
 			}
+			songs.push_back( unique_ptr<Song> (new Instrumental(title, performedBy, tags, instruments, bpm)));
 		}
 	}
 
@@ -154,8 +147,9 @@ vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 }
 
 /**
-* return all the line between {}
-*/
+    * a helper function .
+    * @return a string within {}.
+    */
 string SongsFactory::getWordList(const string line)
 {
 

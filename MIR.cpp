@@ -12,8 +12,8 @@
 #include <sstream>
 
 #include "Song.h"
-#include "Instrumental.h"
-#include "Lyrical.h"
+//#include "Instrumental.h"
+//#include "Lyrical.h"
 #include "SongsFactory.h"
 #include "Parameters.h"
 #include "SortHelper.h"
@@ -37,6 +37,11 @@ typedef unique_ptr<Song> uSongPtr;
 int main(int argc, char *argv[])
 {
 
+    if (argc != 4)
+    {
+        cout << "Usage: MIR < songs file name > < parameters file name > < queries file name >"<<endl;
+        exit(1);
+    }
     vector<uSongPtr> songs = SongsFactory::getSongs(string(argv[1]));
     Song::init(Parameters(string(argv[2])));
     vector<string> queries = readQueriesFromFile(string(argv[3]));
@@ -47,12 +52,12 @@ int main(int argc, char *argv[])
         SortHelper s;
 		for (auto &song : songs)
         {
-            s.addItem((*song).calcScore(query));
+            s.addItem(song->calcScore(query));
         }
         vector<int> order = s.getSortedOrderInVector();
         for (auto place : order)
         {
-            if (songs[place] <= 0)
+            if (songs[place]->calcScore(query) <= 0)
             {
                 break;
             }
@@ -80,7 +85,7 @@ vector<string> readQueriesFromFile(string queriesFileName)
         getline(instream, line);
         if (line.empty())
         {
-            continue
+            continue;
         }
         queries.push_back(line);
     }
@@ -95,56 +100,3 @@ void printQueryBegin(string query)
     cout << "Query word: " << query <<endl;
     cout << endl;
 }
-
-
-//class base
-//{
-//
-//    public:
-//
-//    struct A
-//    {int a = 5;};
-//    virtual void boo()
-//        {
-//            A c;
-//            foo(c);
-//        }
-//protected:
-//virtual void foo(A c)
-//    {cout<< "base foo(): "<< c.a<<endl;}
-//
-//
-//};
-//
-//class son : public base
-//{
-//    struct A
-//    {
-//        int a = 2;
-//        int v = 7;
-//    };
-//
-//public:
-//    void boo()
-//    {
-//        A d;
-//        foo(d);
-//    }
-//    void foo(A c)
-//    {cout<< "son foo(): "<<c.v<<endl;}
-//
-//};
-//
-//int main ()
-//{
-//base b;
-//son s;
-//
-//
-//
-//b.boo();
-//s.boo();
-//base *c = &s;
-//c->boo();
-//}
-

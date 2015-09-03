@@ -8,7 +8,9 @@
 #include<vector>
 #include<map>
 
-
+/**
+* a lyrical song class
+*/
 class Lyrical : public Song
 {
 public:

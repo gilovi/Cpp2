@@ -2,6 +2,7 @@ CC=g++
 CPPFLAGS  = -std=c++11 -g -Wextra -Wall
 RM=rm -f
 TAR = ex2.tar
+VALGRIND = valgrind --leak-check=full --show-possibly-lost=yes --show-reachable=yes --undef-value-errors=yes
 
 SRCS= Song.cpp Instrumental.cpp Lyrical.cpp Parameters.cpp SongsFactory.cpp SortHelper.cpp MIR.cpp
 OBJS=$(subst .cpp,.o,$(SRCS))
@@ -25,7 +26,7 @@ SongsFactory.o: SongsFactory.h SongsFactory.cpp Parameters.o Lyrical.o Instrumen
 
 SortHelper.o: SortHelper.cpp SortHelper.h
 
-MIR.o: MIR.cpp MIR.h Song.o SortHelper.o SongsFactory.o
+MIR.o: MIR.cpp Song.o SortHelper.o SongsFactory.o Parameters.o
 
 
 tar:
