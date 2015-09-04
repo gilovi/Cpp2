@@ -1,0 +1,41 @@
+ex2 - MIR 
+gilovi
+
+Classes:
+========
+Song, Lyrical, Instrumental, Parameters, SongsFactory.
+
+
+Hirarchy:
+=========
+The general hirarchy looks like this:
+
+			-----------------
+			|  Song class   |
+			|		|
+			|  Parameters	|
+			-----------------
+			/		\
+		  Lyrical :song		Instrumental:song	---	friend: SongsFactory
+
+The songs contains a static (protected) 'parameters' data structure, which sould be initiated (using 'init' method) prior to class usage.
+The print and calculation of differant song types is done via polymorphism.
+the creation of objects by demand is done through the SongsFactory class (which returns a smart pointers array.)
+
+The main 'MIR' then uses the factory to create a song list, sorts them using SortHelper (and the overloaded virtual calcScore function) and finally prints the relevant songs (using the virtual overloaded print function) 
+
+Design:
+========
+A. Lyrical and Instrumental 'are' songs so the basic hirarchy is logical.
+
+B. The song has pure virtual functions as in our exercise there is no such thing as a song without a genere.
+
+C. The parameters is a simple data structure to contain the meta data about songs. the data suppouse to hold
+for all kinds of songs and should be updated for new data, so its makes  sense to make the parameters a static member. Parameters constructors are private so it wont be instaced (it is merly a 'static class')
+
+D. The factory concept is an OOP'ish design chosen because the need to create differant types of songs.
+the only drawbak is the dynamyc allocation such design demands. the pitfalls was evoided using smart pointers (unique_ptr).
+
+
+
+

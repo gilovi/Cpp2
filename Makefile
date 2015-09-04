@@ -30,7 +30,7 @@ MIR.o: MIR.cpp Song.o SortHelper.o SongsFactory.o Parameters.o
 
 
 tar:
-	tar cvf $(TAR)  Makefile $(SRCS) Song.h Instrumental.h Lyrical.h Parameters.h SongsFactory.h SortHelper.h
+	tar cvf $(TAR)  Makefile $(SRCS) Song.h Instrumental.h Lyrical.h Parameters.h SongsFactory.h SortHelper.h README 
 
 
 clean:
