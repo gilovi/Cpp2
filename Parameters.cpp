@@ -25,14 +25,14 @@ const string PERFORMED_BY = "performedBy";
 const string BPM = "bpm";
 
 /**
-* default ctor
-*/
+ * default ctor
+ */
 Parameters::Parameters()
 {
 	//ctor
 }
 /**
-* ctor from file path.
+ * ctor from file path.
  */
 Parameters::Parameters(std::string paramsFile)
 {
@@ -44,14 +44,14 @@ Parameters::Parameters(std::string paramsFile)
 
 	string line = "";
 
-	while(instream.good())
+	while (instream.good())
 	{
 		getline(instream, line);
 		if (line.empty())
-        {
-            continue;
-        }
-		vector<string> splited = split(line, DESCRIPTION_SEPARATOR);
+		{
+			continue;
+		}
+		vector < string > splited = split(line, DESCRIPTION_SEPARATOR);
 
 		string param = splited[0];
 		string val = splited[1];
@@ -73,7 +73,7 @@ Parameters::Parameters(std::string paramsFile)
 		}
 		else // it's probably bpm rates
 		{
-		    vector<string> bpmStr = split(val, NUM_SEPARATOR);
+			vector < string > bpmStr = split(val, NUM_SEPARATOR);
 			vector<double> bpmParams;
 
 			bpmParams.push_back(stod(bpmStr[0]));
@@ -91,29 +91,29 @@ Parameters::~Parameters()
 	//dtor
 }
 /**
-* _tagMatchWeight setter
-*/
+ * _tagMatchWeight setter
+ */
 void Parameters::setTagMatchWeight(int w)
 {
 	_tagMatchWeight = w;
 }
 /**
-* _lyricsMatchWeight setter
-*/
+ * _lyricsMatchWeight setter
+ */
 void Parameters::setLyricsMatchWeight(int w)
 {
 	_lyricsMatchWeight = w;
 }
 /**
-* _instrumentMatchWeight setter
-*/
+ * _instrumentMatchWeight setter
+ */
 void Parameters::setInstrumentMatchWeight(int w)
 {
-	_instrumentMatchWeight = w ;
+	_instrumentMatchWeight = w;
 }
 /**
-* _bpmLikelihoodWeight setter
-*/
+ * _bpmLikelihoodWeight setter
+ */
 void Parameters::setBpmLikelihoodWeight(int w)
 {
 	_bpmLikelihoodWeight = w;
@@ -126,15 +126,15 @@ void Parameters::addBmpWord(std::string word, vector<double> vals)
 	_bmpParams[word] = vals;
 }
 /**
-* a static helper function to split a string around a given delimeter
+ * a static helper function to split a string around a given delimeter
  */
 vector<string> Parameters::split(const string& str, const char& delimiter)
 {
-	vector<string> internal;
+	vector < string > internal;
 	stringstream ss(str); // Turn the string into a stream.
 	string tok;
 
-	while(getline(ss, tok, delimiter))
+	while (getline(ss, tok, delimiter))
 	{
 		internal.push_back(tok);
 	}

@@ -18,19 +18,18 @@ const string END_OF_SONGS = "***";
 const string TITLE = "title";
 const string TAGS = "tags";
 const string LYRICS = "lyrics";
-const char WORDS_SEPARATOR= ' ';
+const char WORDS_SEPARATOR = ' ';
 const std::string LYRICS_BY = "lyricsBy";
 const std::string INSTRUMENTS = "instruments";
 const std::string PERFORMED_BY = "performedBy";
 const std::string BPM = "bpm";
 
-
 /**
-    * a function to extract songs from file
-    */
-vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
+ * a function to extract songs from file
+ */
+vector<std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 {
-	vector<std::unique_ptr<Song>> songs;
+	vector < std::unique_ptr < Song >> songs;
 
 	ifstream instream(songsFileName.c_str());
 	if (!instream.is_open())
@@ -40,11 +39,9 @@ vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 
 	string line = "";
 
-
-
 	int lastSong = 0;
 
-	while(instream.good() && !lastSong)
+	while (instream.good() && !lastSong)
 	{
 		if (line.compare(SEPARATOR) != 0)
 		{
@@ -66,17 +63,19 @@ vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 		getline(instream, line);
 		// Expect a line of "tags: {...}"
 
-        vector <string> tagsVec = Parameters::split(getWordList(line), WORDS_SEPARATOR);
+		vector < string > tagsVec = Parameters::split(getWordList(line),
+				WORDS_SEPARATOR);
 		map<string, int> tags;
-		for (vector<string>::iterator it = tagsVec.begin() ; it != tagsVec.end(); ++it)
+		for (vector<string>::iterator it = tagsVec.begin(); it != tagsVec.end();
+				++it)
 		{
 			assert(it + 1 != tagsVec.end()); // wrong tags. (the tags are odd)
 			tags[*it] = stoi(*(++it));
 		}
 
-		vector<string> lyrics;
+		vector < string > lyrics;
 		string lyricsBy = "";
-		map<string, int> instruments ;
+		map<string, int> instruments;
 		string performedBy = "";
 		int bpm = 0;
 
@@ -94,14 +93,17 @@ vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 			pos = LYRICS_BY.size() + 2;
 			lyricsBy = line.substr(pos);
 
-			songs.push_back( unique_ptr<Song> (new Lyrical(title, lyricsBy, tags, lyrics)));
+			songs.push_back(
+					unique_ptr < Song
+							> (new Lyrical(title, lyricsBy, tags, lyrics)));
 		}
 		else
 		{
 			// Then we have an instrumental song
 
 			// Lets get the instruments:
-			vector <string> instrumentsVec = Parameters::split(getWordList(line), WORDS_SEPARATOR);
+			vector < string > instrumentsVec = Parameters::split(
+					getWordList(line), WORDS_SEPARATOR);
 			for (auto instrument : instrumentsVec)
 			{
 				instruments[instrument] = 1;
@@ -123,7 +125,6 @@ vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 				lastSong = 1;
 			}
 
-
 			if (line.substr(0, BPM.size()).compare(BPM) == 0)
 			{
 
@@ -133,9 +134,14 @@ vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 			}
 			else
 			{
-				assert ( (line.compare(SEPARATOR) == 0) || (line.compare(END_OF_SONGS) == 0));
+				assert(
+						(line.compare(SEPARATOR) == 0)
+								|| (line.compare(END_OF_SONGS) == 0));
 			}
-			songs.push_back( unique_ptr<Song> (new Instrumental(title, performedBy, tags, instruments, bpm)));
+			songs.push_back(
+					unique_ptr < Song
+							> (new Instrumental(title, performedBy, tags,
+									instruments, bpm)));
 		}
 	}
 
@@ -143,22 +149,20 @@ vector <std::unique_ptr<Song>> SongsFactory::getSongs(std::string songsFileName)
 
 	return songs;
 
-
 }
 
 /**
-    * a helper function .
-    * @return a string within {}.
-    */
+ * a helper function .
+ * @return a string within {}.
+ */
 string SongsFactory::getWordList(const string line)
 {
 
 	size_t pos1 = line.find("{");
 	size_t pos2 = line.find("}");
 
-	return line.substr(pos1+1,pos2-pos1-1);
+	return line.substr(pos1 + 1, pos2 - pos1 - 1);
 }
-
 
 //ifstream instream openFile(string fileName)
 //{

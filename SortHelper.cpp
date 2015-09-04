@@ -1,9 +1,9 @@
 #include "SortHelper.h"
 /**
-    * add an item, with size() index
-    * As in insertion sort, place the given value in the appropriate
-  	* position, while maintaining a sorted list, with descending order of values.
-  	*/
+ * add an item, with size() index
+ * As in insertion sort, place the given value in the appropriate
+ * position, while maintaining a sorted list, with descending order of values.
+ */
 void SortHelper::addItem(const int value)
 {
 	// The original index of the new item will be the index in the order of
@@ -34,13 +34,13 @@ void SortHelper::addItem(const int value)
 }
 
 /**
-	 *   Get the sorted order of indices (the indices of the insertion of items,
-	 * sorted according to the values of the items).
-	 *   The given array must be of length the same as the number of values inserted
-	 * (the same as what SortHelper::size() will return),
-	 * otherwise memory access errors (like segmentation fault) might occur.
-	 *   The given array will be filled with the indices in the sorted order.
-	 */
+ *   Get the sorted order of indices (the indices of the insertion of items,
+ * sorted according to the values of the items).
+ *   The given array must be of length the same as the number of values inserted
+ * (the same as what SortHelper::size() will return),
+ * otherwise memory access errors (like segmentation fault) might occur.
+ *   The given array will be filled with the indices in the sorted order.
+ */
 void SortHelper::getSortedOrderInArray(int arrayToFill[]) const
 {
 	if (arrayToFill != NULL)
@@ -73,7 +73,8 @@ std::list<int> SortHelper::getSortedOrderInList() const
 	std::list<int>::iterator orderIter;
 	std::list<ListItem>::const_iterator itemsIter;
 
-	for (orderIter = orderList.begin(), itemsIter = _list.begin(); itemsIter != _list.end(); orderIter++, itemsIter++)
+	for (orderIter = orderList.begin(), itemsIter = _list.begin();
+			itemsIter != _list.end(); orderIter++, itemsIter++)
 	{
 		*orderIter = itemsIter->_originalIndex;
 	}
